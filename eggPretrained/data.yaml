@@ -1,0 +1,13 @@
+train: ../train/images
+val: ../valid/images
+test: ../test/images
+
+nc: 8
+names: ['Ancylostoma Spp', 'Ascaris Lumbricoides', 'Enterobius Vermicularis', 'Fasciola Hepatica', 'Hymenolepis', 'Schistosoma', 'Taenia Sp', 'Trichuris Trichiura']
+
+roboflow:
+  workspace: projetos-pessoais-3q4uz
+  project: ovos-de-parasitas-azoug
+  version: 6
+  license: CC BY 4.0
+  url: https://universe.roboflow.com/projetos-pessoais-3q4uz/ovos-de-parasitas-azoug/dataset/6
