@@ -1,4 +1,6 @@
 from flask import Flask, render_template, redirect, url_for, request
+from werkzeug.utils import secure_filename
+import os
 
 app = Flask(__name__)
 
@@ -6,18 +8,25 @@ app = Flask(__name__)
 def index():
     return render_template("index.html")
 
+UPLOAD_FOLDER = 'static/uploads'
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
+
 @app.route('/predict', methods=['POST'])
 def predict():
     if 'Image-Upload' not in request.files:
-        return redirect(request.url)
+        return 'No file part'
     file = request.files['Image-Upload']
     if file.filename == '':
-        return redirect(request.url)
+        return 'No selected file'
     if file:
-        # Process the file here
-        # For example, save it to a directory or pass it to your prediction model
-        return 'File received and processed'
-    return 'No file received'
+        filename = secure_filename(file.filename)
+        filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+        file.save(filepath)
+        # Assuming you have a template named 'display_image.html'
+        # that is designed to display an image
+        return render_template('predict.html', image_url=filepath)
+    return 'Error'
 
 if __name__ == '__main__':
     app.run(debug=True, port=5001)
