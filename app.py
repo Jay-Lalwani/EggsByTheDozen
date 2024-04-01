@@ -23,8 +23,6 @@ def predict():
         filename = secure_filename(file.filename)
         filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
         file.save(filepath)
-        # Assuming you have a template named 'display_image.html'
-        # that is designed to display an image
         return render_template('predict.html', image_url=filepath)
     return 'Error'
 
