@@ -2,6 +2,7 @@ from flask import Flask, render_template, redirect, url_for, request
 from werkzeug.utils import secure_filename
 import os
 from ultralytics import YOLO
+from PIL import Image
 
 app = Flask(__name__)
 
@@ -27,6 +28,13 @@ def predict():
         
         # Insert YOLOv8 code here
         model = YOLO("runs/detect/train/weights/best.pt")
+
+        # Normalize the image to grayscale and resize to 640x640
+        image = Image.open(filepath)
+        image = image.convert('L')
+        image = image.resize((640, 640))
+        image.save(filepath)
+
         results = model(filepath, save=True, exist_ok=True)[0]
         save_path = f"runs/detect/predict/{filename}"
         # copy the image at save_path to static/uploads
