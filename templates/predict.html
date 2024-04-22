@@ -3,10 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <title>Fecal Egg Count Results</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-image: url("{{ url_for('static', filename='images/farm.jpg') }}");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: #333;
+            line-height: 1.6;
+            margin: 0;
+            padding: 40px 20px; /* Padding to ensure content doesn't touch the edges */
+            text-align: center;
+            height: 88vh; /* Full viewport height */
+            display: flex;
+            flex-direction: column;
+            justify-content: center; /* Vertically center the content */
+            align-items: center; /* Horizontally center the content */
+        }
+
+        h1 {
+            color: #ffffff;
+            font-size: 28px;
+            background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent background for legibility */
+            padding: 20px;
+            border-radius: 10px;
+            margin: 0; /* Remove margin to prevent scrolling */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        img {
+            max-width: 90%; /* Slightly reduced to maintain aesthetics */
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            margin-top: 20px; /* Space between the title and image */
+        }
+    </style>
 </head>
 <body>
     <h1>{{count}} Parasite Eggs Detected.</h1>
     <!-- Display the image using the passed URL -->
-    <img src="{{image_url }}" alt="Uploaded Image">
+    <img src="{{image_url}}" alt="Uploaded Image">
 </body>
 </html>

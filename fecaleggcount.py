@@ -13,4 +13,4 @@ model = YOLO("runs/detect/train/weights/best.pt")
 # print(len(results.boxes))
 
 # validate the model by finding precision
-results = model.validation(data="datasets/eggPretrained/data.yaml", imgsz=640, iou_thres=0.6, conf_thres=0.001, save_json=True, verbose=True)[0]
+metrics = model.val()
