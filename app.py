@@ -35,7 +35,7 @@ def predict():
         image = image.resize((640, 640))
         image.save(filepath)
 
-        results = model(filepath, save=True, exist_ok=True)[0]
+        results = model(filepath, save=True, exist_ok=True, iou=0)[0]
         save_path = f"runs/detect/predict/{filename}"
         # copy the image at save_path to static/uploads
         os.system(f"cp {save_path} {app.config['UPLOAD_FOLDER']}")
