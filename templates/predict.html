@@ -30,10 +30,9 @@
             background-attachment: fixed;
             color: #333;
             line-height: 1.6;
-            margin: 0;
+            margin-top: 20px;
             padding: 40px 20px; /* Padding to ensure content doesn't touch the edges */
             text-align: center;
-            height: 88vh; /* Full viewport height */
             display: flex;
             flex-direction: column;
             justify-content: center; /* Vertically center the content */
@@ -48,23 +47,30 @@
             border-radius: 10px;
             margin: 0; /* Remove margin to prevent scrolling */
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-            margin-top: 20px;
         }
 
+        .content-container {
+            display: flex; /* Enable Flexbox */
+            align-items: center; /* Center items vertically */
+            justify-content: center; /* Center items horizontally */
+            width: 100%; /* Take full width of the container */
+            margin-top: 20px; /* Space from the title */
+        }
+        
         img {
-            max-width: 90%; /* Slightly reduced to maintain aesthetics */
+            max-width: 40%; /* Adjust width to leave space for text */
             height: auto;
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-            margin-top: 20px; /* Space between the title and image */
+            margin-right: 20px; /* Add space between the image and the text */
         }
+        
         #parasites {
-            background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+            background-color: rgba(255, 255, 255, 0.8);
             padding: 15px;
             border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-            width: 20%; /* Optimal width for readability */
-            margin-top: 20px; /* Space between the image and this div */
+            width: 20%; /* Adjust width to fit next to the image */
         }
         
         #parasites p {
@@ -81,13 +87,13 @@
 
     <h1>{{count}} Parasite Eggs Detected.</h1>
     <!-- Display the image using the passed URL -->
-    <img src="{{image_url}}" alt="Uploaded Image">
-
-    <div id="parasites">
-        <!-- Use Jinja2 templating to loop through the dictionary -->
-        {% for parasite, number in parasites.items() %}
-            <p>{{ parasite }}: {{ number }}</p>
-        {% endfor %}
+    <div class="content-container">
+        <img src="{{image_url}}" alt="Uploaded Image">
+        <div id="parasites">
+            {% for parasite, number in parasites.items() %}
+                <p>{{ parasite }}: {{ number }}</p>
+            {% endfor %}
+        </div>
     </div>
 </body>
 </html>
