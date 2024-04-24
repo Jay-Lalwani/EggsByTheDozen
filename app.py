@@ -3,6 +3,7 @@ from werkzeug.utils import secure_filename
 import os
 from ultralytics import YOLO
 from PIL import Image
+import json
 
 app = Flask(__name__)
 
@@ -40,7 +41,14 @@ def predict():
         # copy the image at save_path to static/uploads
         os.system(f"cp {save_path} {app.config['UPLOAD_FOLDER']}")
 
-        return render_template('predict.html', image_url=filepath, count=len(results.boxes))
+        c = 0
+        para = dict()
+        for detection in results:
+            detection = json.loads(detection.tojson())[0]
+            para[detection['name']] = para.get(detection['name'], 0) + 1
+            c += 1
+            
+        return render_template('predict.html', image_url=filepath, count=c, parasites=para)
     return 'Error'
 
 if __name__ == '__main__':

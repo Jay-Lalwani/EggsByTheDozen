@@ -4,6 +4,24 @@
     <meta charset="UTF-8">
     <title>Fecal Egg Count Results</title>
     <style>
+        #home-button {
+            position: absolute; /* Position it relative to the nearest positioned ancestor */
+            top: 10px; /* Distance from the top of the viewport */
+            left: 10px; /* Distance from the left of the viewport */
+            background-color: #4676D7; /* Button color */
+            color: #ffffff; /* Text color */
+            padding: 8px 16px; /* Padding inside the button */
+            text-decoration: none; /* Remove underline from the link */
+            font-size: 16px; /* Set font size */
+            border-radius: 5px; /* Rounded corners */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Shadow for 3D effect */
+            transition: background-color 0.3s; /* Smooth transition for hover effect */
+        }
+        
+        #home-button:hover {
+            background-color: #3458A4; /* Darker shade for hover effect */
+        }
+        
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-image: url("{{ url_for('static', filename='images/farm.jpg') }}");
@@ -30,6 +48,7 @@
             border-radius: 10px;
             margin: 0; /* Remove margin to prevent scrolling */
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            margin-top: 20px;
         }
 
         img {
@@ -39,11 +58,36 @@
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
             margin-top: 20px; /* Space between the title and image */
         }
+        #parasites {
+            background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            width: 20%; /* Optimal width for readability */
+            margin-top: 20px; /* Space between the image and this div */
+        }
+        
+        #parasites p {
+            font-size: 21px; /* Larger font size for better readability */
+            color: #333; /* Dark grey color for text */
+            margin: 10px 0; /* Vertical spacing between paragraphs */
+            line-height: 1.4; /* Spacing between lines of text */
+            font-weight: bold; /* Bold text for emphasis */
+        }
     </style>
 </head>
 <body>
+    <a href="{{ url_for('index') }}" id="home-button">Return to Home</a>
+
     <h1>{{count}} Parasite Eggs Detected.</h1>
     <!-- Display the image using the passed URL -->
     <img src="{{image_url}}" alt="Uploaded Image">
+
+    <div id="parasites">
+        <!-- Use Jinja2 templating to loop through the dictionary -->
+        {% for parasite, number in parasites.items() %}
+            <p>{{ parasite }}: {{ number }}</p>
+        {% endfor %}
+    </div>
 </body>
 </html>
