@@ -28,7 +28,7 @@ def predict():
         file.save(filepath)
         
         # Insert YOLOv8 code here
-        model = YOLO("runs/detect/train3/weights/best.pt") # train --> 2 epochs; train2 --> 50 epochs;
+        model = YOLO("runs/detect/train3/weights/best.pt") # train --> 2 epochs; train2 --> 50 epochs; train3 --> 150 epochs
 
         # Normalize the image to grayscale and resize to 640x640
         image = Image.open(filepath)
